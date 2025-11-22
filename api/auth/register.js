@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken"
 
 export default async function handler(req, res) {
     if (req.method!=="POST") {
-        res.send(405).json({message: "Method not allowed"})
+        return res.send(405).json({message: "Method not allowed"})
     }
 
     const {name, email, password} = req.body
