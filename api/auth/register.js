@@ -3,7 +3,7 @@ import User from "../models/User"
 import jwt from "jsonwebtoken"
 
 export default async function handler(req, res) {
-    if (req.method==="POST") {
+    if (req.method!=="POST") {
         res.send(405).json({message: "Method not allowed"})
     }
 
