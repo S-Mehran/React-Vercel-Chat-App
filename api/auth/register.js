@@ -1,10 +1,10 @@
-import connectDB from "../_db"
-import User from "../models/User"
+import connectDB from "../_db.js"
+import {User} from "../models/User.js"
 import jwt from "jsonwebtoken"
 
 export default async function handler(req, res) {
     if (req.method!=="POST") {
-        return res.send(405).json({message: "Method not allowed"})
+        return res.status(405).json({message: "Method not allowed"})
     }
 
     const {name, email, password} = req.body
@@ -33,7 +33,7 @@ export default async function handler(req, res) {
     }
 
     newUser.save()
-    const token = jwt.sign(newUser, "nrakjwnrqwneqw")
+    const token = jwt.sign({ id: newUser._id, email: newUser.email }, "nrakjwnrqwneqw")
 
-    res.send(201).json({newUser, token})
+    res.status(201).json({newUser, token})
 }
