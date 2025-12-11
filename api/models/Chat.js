@@ -3,18 +3,19 @@ import mongoose from "mongoose"
 
 const ChatSchema = new mongoose.Schema({
     isGroup: {type: Boolean, default: false},
-    name: String,
-    avatar: String,
+    name: {type: String, required: false},
+    avatar: {type: String, required: false},
     members: [
         {
+            _id: false,
             userId: {type: mongoose.Schema.Types.ObjectId, ref: "User"},
             role: {type: String, default: "member"},
         },
     ],
     lastMessage: {
-        messageId: mongoose.Schema.Types.ObjectId,
+        messageId: {type: mongoose.Schema.Types.ObjectId, ref: "Message"},
         text: String,
-        senderId: mongoose.Schema.Types.ObjectId,
+        senderId: {type: mongoose.Schema.Types.ObjectId, ref: "User"},
         createdAt: Date,
     },
 
@@ -25,4 +26,4 @@ const ChatSchema = new mongoose.Schema({
 
 ChatSchema.index({"members.userId": 1})
 
-export const User = mongoose.models.User || mongoose.model('User', UserSchema)
+export const Chat = mongoose.models.Chat || mongoose.model('Chat', ChatSchema)

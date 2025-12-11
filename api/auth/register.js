@@ -1,4 +1,4 @@
-import connectDB from "../_db.js"
+import connectDB from "../models/_db.js"
 import {User} from "../models/User.js"
 import bcrypt from "bcrypt"
 
@@ -20,7 +20,6 @@ export default async function handler(req, res) {
     if (exists) {
         return res.status(400).json({error: "User Exists"})
     }
-    console.log(process.env.SALT_ROUNDS)
     const salt = await bcrypt.genSalt(Number(process.env.SALT_ROUNDS));
     const hashedPassword = await bcrypt.hash(password, salt);
 

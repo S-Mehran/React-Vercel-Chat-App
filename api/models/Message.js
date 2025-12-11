@@ -1,7 +1,7 @@
 import mongoose from "mongoose"
 
 
-const ChatSchema = new mongoose.Schema({
+const MessageSchema = new mongoose.Schema({
     chatId: {type: mongoose.Schema.Types.ObjectId, ref: "Chat", index: true},
     senderId: {type: mongoose.Schema.Types.ObjectId, ref: "User"},
     text: String,
@@ -18,7 +18,7 @@ const ChatSchema = new mongoose.Schema({
 
 )
 
-ChatSchema.index({"chatId": 1, createAt: -1})
+MessageSchema.index({"chatId": 1, createdAt: -1})
 //-1 for reverse indexing. So, last messages are retrieved first
 
-export const User = mongoose.models.User || mongoose.model('User', UserSchema)
+export const Message = mongoose.models.Message || mongoose.model('Message', MessageSchema)

@@ -1,5 +1,5 @@
 import { Db } from "mongodb"
-import connectDB from "../_db.js"
+import connectDB from "../models/_db.js"
 import {User} from "../models/User.js"
 import jwt from "jsonwebtoken"
 import bcrypt from "bcrypt"
